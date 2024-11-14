@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="2">
+    <title>LPG Gas Monitor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white flex flex-col items-center min-h-screen p-4 relative">
+    <nav class="mb-8">
+        <h1 class="text-2xl font-bold">LPG Gas Monitor</h1>
+    </nav>
+
+    <!-- Container for Graph and Values Boxes -->
+    <div class="bg-neutral-900 rounded-lg flex flex-col items-center font-mono p-4 space-y-4">
+        <div class="flex space-x-4">
+            <!-- Concentration Box -->
+            <div class="bg-neutral-700 shadow-lg rounded-lg w-40 h-24 flex flex-col items-center justify-center">
+                <p class="text-lg">Concentration</p>
+                {% if concentration > 250 %}
+                    <p class="text-3xl font-bold text-red-500">{{ concentration }} ppm</p>
+                {% else %}
+                    <p class="text-3xl font-bold text-green-500">{{ concentration }} ppm</p>
+                {% endif %}
+            </div>
+
+            <!-- Level Box -->
+            <div class="bg-neutral-700 shadow-lg rounded-lg w-40 h-24 flex flex-col items-center justify-center">
+                <p class="text-lg">Level</p>
+                {% if level < 10 %}
+                        <p class="text-3xl font-bold text-red-500">{{ level }} kg</p>
+                {% else %}
+                        <p class="text-3xl font-bold text-green-500">{{ level }} kg</p>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <div class="bg-neutral-700 shadow-lg p-4 rounded-lg w-full">
+            <p class="font-mono text-lg text-center">Alert Message</p>
+            <div class="bg-black p-4 rounded-lg text-center">
+                {% if concentration > 250 and level < 10 %}
+                    <span class="relative inline-flex">
+                        <span class="animate-ping absolute right-0 inline-flex h-3 w-3 rounded-full bg-red-500 opacity-75"></span>
+                        <span class="relative text-red-500 font-bold">Leakage and Low Level Detected</span>
+                    </span>
+                {% elif concentration > 250 %}
+                    <span class="relative inline-flex">
+                        <span class="animate-ping absolute right-0 inline-flex h-3 w-3 rounded-full bg-red-500 opacity-75"></span>
+                        <span class="relative text-red-500 font-bold">Leakage Detected</span>
+                    </span>
+                {% elif level < 10 %}
+                    <span class="relative inline-flex">
+                        <span class="animate-ping absolute right-0 inline-flex h-3 w-3 rounded-full bg-red-500 opacity-75"></span>
+                        <span class="relative text-red-500 font-bold">Low Level Detected</span>
+                    </span>
+                {% else %}
+                    <span class="text-green-500 font-bold">Normal</span>
+                {% endif %}
+            </div>
+        </div>
+
+
+    <a href="/alerts" class="bg-red-600 hover:bg-red-400 rounded-lg p-2 w-full font-mono font-bold shadow-md shadow-red-900 text-center">Alerts</a>
+    </div>
+
+    <!-- Footer positioned in the bottom left corner -->
+{#    <footer class="bg-neutral-700 font-mono p-4 m-4 rounded-lg absolute bottom-0 left-0">#}
+{#        <p>Team Members</p>#}
+{#        <p class="hover:text-green-600">Jagan Prasath R</p>#}
+{#        <p class="hover:text-green-600">Nirmal Kumar SP</p>#}
+{#        <p class="hover:text-green-600">Harsith Kumar KS</p>#}
+{#    </footer>#}
+</body>
+</html>

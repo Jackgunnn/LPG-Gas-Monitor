@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Alerts</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-black text-white flex flex-col items-center min-h-screen p-4">
+        <nav class="mb-8">
+            <h1 class="text-2xl text-red-600 font-bold">Alerts</h1>
+        </nav>
+
+       {% if alerts %}
+            <div class="bg-red-900 rounded-lg mb-2 w-3/4 font-mono font-semibold">
+                <div class="flex justify-between items-center p-5 text-xl">
+                    <p class="w-1/4 text-center">Alert Type</p>
+                    <p class="w-1/4 text-center">Concentration</p>
+                    <p class="w-1/4 text-center">Weight</p>
+                    <p class="w-1/4 text-center">Date/Time</p>
+                </div>
+            </div>
+
+            {% for alert in alerts %}
+                <div class="bg-neutral-700 rounded-lg mb-2 w-3/4 font-mono font-semibold">
+                    <div class="flex justify-between items-center p-2 text-xl">
+                        <p class="w-1/4 text-center">{{ alert.alert_type }}</p>
+                        <p class="w-1/4 text-center">{{ alert.concentration }} ppm</p>
+                        <p class="w-1/4 text-center">{{ alert.weight }} kg</p>
+                        <p class="w-1/4 text-center">{{ alert.time.strftime('%d-%m-%Y %H:%M') }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+
+       {% else %}
+           <div class="p-8 m-8 text-xl font-mono font-semibold">
+                <h1>--No Alerts--</h1>
+           </div>
+
+       {% endif %}
+
+{#        <footer>#}
+{#              <div class="flex justify-between items-center text-base font-mono font-semibold">#}
+{#                <p class="bg-red-700 p-1">Gas Leak</p>#}
+{#                <p class="bg-blue-700 p-1">Low Level</p>#}
+{#              </div>#}
+{#        </footer>#}
+    </body>
+</html>
